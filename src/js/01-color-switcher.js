@@ -9,19 +9,22 @@ let timerId;
 
 refs.startBtn.addEventListener("click", onStartBtnClick);
 refs.stopBtn.addEventListener("click", onStopBtnClick);
+refs.stopBtn.disabled = true;
 
 function onStartBtnClick(e) {
-	e.target.setAttribute("disabled", "");
+	refs.startBtn.disabled = true;
+	refs.stopBtn.disabled = false;
+
 	timerId = setTimeout(function changeBodyColor() {
 		refs.body.style.backgroundColor = getRandomHexColor();
 		timerId = setTimeout(changeBodyColor, DELAY);
 	}, DELAY);
-
 }
 
 function onStopBtnClick(e) {
+	refs.startBtn.disabled = false;
+	refs.stopBtn.disabled = true;
 	clearTimeout(timerId);
-	refs.startBtn.removeAttribute('disabled');
 }
 
 function getRandomHexColor() {
